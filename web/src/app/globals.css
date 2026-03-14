@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/*
+ * レスポンシブデザインシステム（黄金比 φ = 1.618 & 人間工学基準）
+ *
+ * ブレークポイント:
+ *   - Mobile:  ~639px  (iPhone, Android)
+ *   - Tablet:  640px~1023px (iPad)
+ *   - Desktop: 1024px~ (PC)
+ *
+ * タイポグラフィスケール:
+ *   - Mobile:  本文 13px, 見出し 16px, タイトル 22px
+ *   - Tablet:  本文 14px, 見出し 17px, タイトル 25px
+ *   - Desktop: 本文 14px, 見出し 18px, タイトル 28px
+ *
+ * 最適行長（日本語）: 35-45文字/行
+ */
+
+@theme {
+  /* Colors */
+  --color-background: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #444444;
+  --color-text-muted: #666666;
+  --color-border: #dddddd;
+  --color-border-dark: #1a1a1a;
+  --color-surface: #f8f8f8;
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
+    font-feature-settings: "palt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Mobile first: 13px */
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  /* Tablet (640px+) */
+  @media (min-width: 640px) {
+    body {
+      font-size: 14px;
+      line-height: 1.85;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    body {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+  }
+
+  ::selection {
+    background-color: #1a1a1a;
+    color: white;
+  }
+}
+
+/* Print */
+@media print {
+  html { font-size: 10pt; }
+  body { background: white; font-size: 10pt; }
+  .page-break { page-break-before: always; }
+  article { page-break-inside: avoid; }
+}
