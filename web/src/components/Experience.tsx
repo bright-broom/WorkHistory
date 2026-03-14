@@ -1,63 +1,69 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { resumeData } from "@/data/resume";
-import { Section } from "./Section";
-import { Briefcase, Calendar } from "lucide-react";
 
 export function Experience() {
   return (
-    <Section id="experience" title="Work Experience">
-      <div className="relative border-l border-white/10 ml-4 md:ml-6 mt-8">
-        {resumeData.experiences.map((exp, idx) => (
-          <motion.div
+    <section className="mb-12">
+      <h2 className="text-[18px] font-bold border-b-2 border-[var(--color-border-dark)] pb-2 mb-6">
+        職務経歴
+      </h2>
+
+      <div className="space-y-8">
+        {resumeData.experiences.map((exp) => (
+          <article
             key={exp.id}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="mb-12 ml-8 md:ml-12 relative group"
+            className="border border-[var(--color-border)] p-6"
           >
-            {/* Timeline Dot */}
-            <div className="absolute -left-[41px] md:-left-[57px] top-1 h-5 w-5 rounded-full border-4 border-[var(--color-background)] bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-transform group-hover:scale-125" />
-
-            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-2">
-              <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
-                {exp.company}
-              </h3>
-              <div className="flex items-center text-sm font-medium text-slate-400 mt-1 md:mt-0 gap-1.5">
-                <Calendar size={14} className="text-slate-500" />
-                <span>{exp.period}</span>
+            {/* ヘッダー：会社名・期間 */}
+            <header className="mb-5 pb-4 border-b border-[var(--color-border)]">
+              <div className="flex justify-between items-start gap-4">
+                <div>
+                  <h3 className="text-[16px] font-bold text-[var(--color-text)] leading-snug mb-1">
+                    {exp.company}
+                  </h3>
+                  <p className="text-[14px] text-[var(--color-text-secondary)]">
+                    {exp.role}
+                  </p>
+                </div>
+                <time className="text-[13px] text-[var(--color-text-muted)] whitespace-nowrap flex-shrink-0 pt-0.5">
+                  {exp.period}
+                </time>
               </div>
-            </div>
-            
-            <div className="flex items-center text-blue-300 font-medium mb-4 gap-2">
-              <Briefcase size={16} />
-              <span>{exp.role}</span>
-            </div>
-            
-            <div className="prose prose-invert max-w-none text-slate-300 mb-4 whitespace-pre-wrap leading-relaxed text-sm md:text-base">
-              {exp.description}
-            </div>
-            
-            <div className="bg-white/5 border border-white/5 rounded-lg p-4 mb-4">
-              <h4 className="text-emerald-400 text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                Key Achievements
-              </h4>
-              <p className="text-sm text-slate-300 leading-relaxed font-medium">
-                {exp.achievements}
-              </p>
-            </div>
+            </header>
 
-            {exp.reason && (
-              <div className="text-sm text-slate-400 italic border-l-2 border-slate-700 pl-4 py-1">
-                {exp.reason}
+            {/* 本文 */}
+            <div className="space-y-5">
+              {/* 業務内容 */}
+              <div>
+                <h4 className="text-[14px] font-bold text-[var(--color-text)] mb-2">
+                  【業務内容】
+                </h4>
+                <p className="text-[14px] text-[var(--color-text)] leading-[1.9] whitespace-pre-wrap">
+                  {exp.description}
+                </p>
               </div>
-            )}
-          </motion.div>
+
+              {/* 実績・成果 */}
+              <div>
+                <h4 className="text-[14px] font-bold text-[var(--color-text)] mb-2">
+                  【実績・成果】
+                </h4>
+                <p className="text-[14px] text-[var(--color-text)] leading-[1.9]">
+                  {exp.achievements}
+                </p>
+              </div>
+
+              {/* 退職理由（存在する場合） */}
+              {exp.reason && (
+                <div className="bg-[var(--color-surface)] p-4 mt-4">
+                  <p className="text-[13px] text-[var(--color-text-muted)] leading-[1.8]">
+                    {exp.reason}
+                  </p>
+                </div>
+              )}
+            </div>
+          </article>
         ))}
       </div>
-    </Section>
+    </section>
   );
 }
