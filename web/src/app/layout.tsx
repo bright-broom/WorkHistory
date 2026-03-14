@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_JP } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const notoSansJP = Noto_Sans_JP({ 
-  subsets: ["latin"], 
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
   weight: ["400", "500", "700"],
-  variable: "--font-noto-sans-jp"
+  variable: "--font-noto-sans-jp",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Toshiki Sakuta | Portfolio",
-  description: "Full-Stack Engineer / BizDev - Portfolio and Resume of Toshiki Sakuta",
+  title: "職務経歴書 | 作田 敏希",
+  description: "作田 敏希の職務経歴書 - Full-Stack Engineer / BizDev",
 };
 
 export default function RootLayout({
@@ -20,15 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable}`}>
-      <body className="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)] selection:bg-blue-500 selection:text-white font-sans overflow-x-hidden">
-        
-        {/* Subtle Background Elements for depth */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/10 blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 blur-[120px]" />
-        </div>
-
+    <html lang="ja" className={notoSansJP.variable}>
+      <body className="min-h-screen bg-[var(--color-background)]">
         {children}
       </body>
     </html>
