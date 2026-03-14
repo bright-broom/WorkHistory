@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 
@@ -12,6 +12,13 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "職務経歴書 | 作田 敏希",
   description: "作田 敏希の職務経歴書 - Full-Stack Engineer / BizDev",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 export default function RootLayout({
