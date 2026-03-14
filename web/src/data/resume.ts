@@ -1,34 +1,16 @@
-export interface Experience {
-  id: string;
-  company: string;
-  period: string;
-  role: string;
-  description: string;
-  achievements: string;
-  reason?: string;
-}
+import type {
+  ResumeData,
+  Experience,
+  SkillItem,
+  Certification,
+  Language,
+  SelfPR,
+} from "@/types/resume";
 
-export interface SkillItem {
-  name: string;
-  items: string[];
-}
+// 型を再エクスポート（後方互換性のため）
+export type { Experience, SkillItem, Certification, Language, SelfPR };
 
-export interface Certification {
-  date: string;
-  name: string;
-}
-
-export interface Language {
-  language: string;
-  level: string;
-}
-
-export interface SelfPR {
-  title: string;
-  content: string;
-}
-
-export const resumeData = {
+export const resumeData: ResumeData = {
   header: {
     name: "作田 敏希",
     title: "Full-Stack Engineer / BizDev",
@@ -68,7 +50,7 @@ IT領域においては、外資系企業でのエンタープライズ向けク
         "CATIA V5",
       ],
     },
-  ] as SkillItem[],
+  ],
   experiences: [
     {
       id: "stealth-startup",
@@ -145,15 +127,15 @@ IT領域においては、外資系企業でのエンタープライズ向けク
       achievements: "応力・疲労強度の定量的検証を行い、要求スペック（安全性・耐久性）を担保しつつ量産コストを最小化するためのデータに基づく形状変更・材質選定（リファクタリング）を主導しました。",
       reason: "【参画・退職の背景】上流工程に携わる中で、「顧客が本当に求めているものは何か」というエンドユーザーの視点に立ち、「自分自身の力で直接売上を創り出すビジネスの最前線」を経験したいと強く考えるようになりました。また、業務を通じて関わっていた顧客企業の営業担当者から「コミュニケーション能力が高く、営業職に向いている」と客観的な評価をいただいたことが大きな後押しとなり、個人の実行力が結果に直結する営業職へのキャリアチェンジを決意いたしました。",
     },
-  ] as Experience[],
+  ],
   certifications: [
     { date: "2010年4月", name: "普通自動車第一種運転免許 取得" },
     { date: "2022年8月", name: "Microsoft Certified Power Platform Fundamentals 取得" },
     { date: "2023年1月", name: "AZ-900 Microsoft Azure Fundamentals 取得" },
-  ] as Certification[],
+  ],
   languages: [
     { language: "英語", level: "日常会話レベル・外資系IT企業でのドキュメント読解経験あり" }
-  ] as Language[],
+  ],
   selfPR: [
     {
       title: "1. 開発現場とビジネスの「認識のズレ」をなくす要件定義力",
@@ -170,5 +152,5 @@ IT領域においては、外資系企業でのエンタープライズ向けク
       content: `これまで多様な業界で事業の「ゼロからの立ち上げ」を経験してきましたが、個人事業や外部からの技術顧問という立場では、「プロダクトを社会に大きなインパクトを与える規模まで育て上げる」フェーズの当事者になりきれないことに、強烈なもどかしさを感じていました。
 私が今、最も求めているのは、自身の多角的なビジネスドメイン知識と技術力のすべてを、一つの自社プロダクトに注ぎ込むことです。チームと苦楽を共にし、技術的負債から逃げずに向き合い、ユーザーに永続的な価値を提供し続ける。そんなエンジニアリング組織を中核から創り上げる覚悟があります。`
     }
-  ] as SelfPR[],
+  ],
 };
