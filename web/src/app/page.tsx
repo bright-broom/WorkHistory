@@ -1,31 +1,29 @@
-import { Hero } from "@/components/Hero";
-import { Skills } from "@/components/Skills";
-import { Experience } from "@/components/Experience";
-import { SelfPR } from "@/components/SelfPR";
-import { Certifications } from "@/components/Certifications";
-import { Languages } from "@/components/Languages";
+import { createClient } from "@/lib/supabase/server";
+import { resumeData as fallbackData } from "@/data/resume";
+import { ResumeContent } from "@/components/ResumeContent";
+import type { ResumeData } from "@/types/resume";
 
-export default function Home() {
-  return (
-    <main className="
-      w-full
-      max-w-[800px]
-      mx-auto
-      px-5 sm:px-8 lg:px-10
-      py-8 sm:py-10 lg:py-12
-      bg-white
-    ">
-      <Hero />
-      <Skills />
-      <Experience />
-      <SelfPR />
-      <Certifications />
-      <Languages />
+export const revalidate = 60; // ISR: 60秒ごとに再検証
 
-      {/* 以上 - 右寄せ */}
-      <footer className="text-right pt-6 sm:pt-8 mt-12 sm:mt-16">
-        <p>以上</p>
-      </footer>
-    </main>
-  );
+export default async function Home() {
+  let resumeData: ResumeData = fallbackData;
+
+  try {
+    const supabase = await createClient();
+
+    if (supabase) {
+      const { data, error } = await supabase
+        .from("resume_data")
+        .select("data")
+        .single();
+
+      if (!error && data?.data) {
+        resumeData = data.data as ResumeData;
+      }
+    }
+  } catch {
+    // Supabaseに接続できない場合はフォールバックデータを使用
+  }
+
+  return <ResumeContent initialData={resumeData} />;
 }
