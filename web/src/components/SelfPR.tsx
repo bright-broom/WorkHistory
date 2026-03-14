@@ -1,24 +1,21 @@
 import { resumeData } from "@/data/resume";
+import { Section } from "./Section";
 
 export function SelfPR() {
   return (
-    <section className="mb-12">
-      <h2 className="text-[18px] font-bold border-b-2 border-[var(--color-border-dark)] pb-2 mb-6">
-        自己PR
-      </h2>
-
-      <div className="space-y-6">
+    <Section title="自己PR">
+      <div className="space-y-6 sm:space-y-8">
         {resumeData.selfPR.map((pr, idx) => (
           <article key={idx}>
-            <h3 className="text-[14px] font-bold text-[var(--color-text)] mb-3">
+            <h3 className="font-bold text-[var(--color-text)] mb-2 sm:mb-3 leading-snug">
               {pr.title}
             </h3>
-            <p className="text-[14px] text-[var(--color-text)] leading-[1.9] whitespace-pre-wrap">
+            <p className="text-[var(--color-text)] leading-[1.85] sm:leading-[1.95] whitespace-pre-wrap">
               {pr.content}
             </p>
           </article>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
